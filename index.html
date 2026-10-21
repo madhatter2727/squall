@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#060711" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Squall" />
+    <title>Squall</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060711'/%3E%3Ccircle cx='18' cy='14' r='6.5' fill='%23F4EDE2'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-phase="night" data-kind="clear" class="show-stars show-moon">
+    <div class="sky" aria-hidden="true">
+      <div class="wash"></div>
+      <div class="stars">
+        <i class="l" style="left:18%;top:46%"></i>
+        <i class="l" style="left:28%;top:62%"></i>
+        <i class="l" style="left:46%;top:70%"></i>
+        <i class="l" style="left:64%;top:52%"></i>
+        <i class="l warm" style="left:86%;top:40%"></i>
+        <i style="left:12%;top:28%"></i>
+        <i style="left:34%;top:16%"></i>
+        <i style="left:48%;top:11%"></i>
+        <i style="left:62%;top:20%"></i>
+        <i style="left:74%;top:34%"></i>
+        <i style="left:40%;top:44%"></i>
+        <i style="left:22%;top:54%"></i>
+        <i style="left:56%;top:60%"></i>
+        <i style="left:78%;top:66%"></i>
+        <i style="left:14%;top:72%"></i>
+        <i class="s" style="left:8%;top:18%"></i>
+        <i class="s" style="left:26%;top:24%"></i>
+        <i class="s" style="left:42%;top:28%"></i>
+        <i class="s" style="left:58%;top:14%"></i>
+        <i class="s" style="left:92%;top:32%"></i>
+        <i class="s" style="left:16%;top:40%"></i>
+        <i class="s" style="left:36%;top:56%"></i>
+        <i class="s" style="left:52%;top:48%"></i>
+        <i class="s" style="left:88%;top:56%"></i>
+        <i class="s" style="left:30%;top:74%"></i>
+        <i class="s warm" style="left:68%;top:72%"></i>
+        <i class="s" style="left:94%;top:48%"></i>
+      </div>
+      <div class="clouds"><i></i><i></i><i></i></div>
+      <div class="rain"></div>
+      <div class="flash"></div>
+      <div class="vignette"></div>
+      <div class="orbits">
+        <div class="sun"></div>
+        <div class="moon"></div>
+      </div>
+    </div>
+    <main class="stage" id="app">
+      <p class="brand">Squall</p>
+      <header class="mast" data-place="Apopka">
+        <p class="place" id="boot-place">Apopka</p>
+      </header>
+      <p class="loading">Loading the forecast…</p>
+    </main>
+    <div class="pull" id="pull" aria-hidden="true">Pull to refresh</div>
+    <div class="sheet-back" id="sheet-back">
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <div class="grab" aria-hidden="true"></div>
+        <div class="dock-head">
+          <h2 id="sheet-title">Places</h2>
+          <button type="button" class="text-btn" id="sheet-close">Done</button>
+        </div>
+        <button type="button" class="loc-btn" id="use-loc">Use my location</button>
+        <p class="loc-note" id="loc-note"></p>
+        <form class="search" id="place-form" role="search">
+          <label class="sr" for="place-q">Search places</label>
+          <input id="place-q" name="place" type="search" placeholder="Search a city" autocomplete="off" enterkeyhint="search" />
+        </form>
+        <div id="place-results"></div>
+        <p class="kicker sheet-kicker">Saved</p>
+        <div id="saved-list"></div>
+      </div>
+    </div>
+    <script>
+      try {
+        var raw = JSON.parse(localStorage.getItem("squall.places.v1") || "null");
+        var active = raw && (raw.places || []).find(function (p) { return p && p.id === raw.activeId; });
+        if (active && active.name) {
+          var boot = document.getElementById("boot-place");
+          boot.textContent = active.name;
+          boot.parentElement.dataset.place = active.name;
+        }
+      } catch (e) {}
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+Sat Oct 17 23:32:31 EDT 2026 Tara told once via parent (build chain check)
+Sun Oct 18 01:36:14 EDT 2026 00:38 stall resolved: pass2 try2 finished M2; no message sent (build chain check)
+Sun Oct 18 02:34:50 EDT 2026 02:32 stall on M3 pass3 try1: chain stopped it and started try2 (--continue); m3 proofs exist, play/scrub and air/tropics shots need fixing; no message sent (build chain check)
+Sun Oct 18 03:34:56 EDT 2026 M3 failed twice (play/scrub proof same frame); changed approach: focused radar-fix pass via m3fix-chain.sh, then milestones.sh for M4; deploy.sh relaunched; no message sent (build chain check)
+Sun Oct 18 04:12:12 EDT 2026 04:09 m3 hang: --continue session idle; stopped it, started fresh-session m3fresh-chain.sh (then milestones.sh for M4); no message sent (build chain check)

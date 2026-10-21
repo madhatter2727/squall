@@ -1,0 +1,20 @@
+node_modules
+dist
+# --- added by fleet backup setup (2026-10-21) ---
+node_modules/
+dist/
+.next/
+build/
+release/
+.vercel/
+.env*
+!.env.example
+*.key
+*.pem
+.venv*/
+venv*/
+venv-*/
+__pycache__/
+chrome-profile/
+.cache/
+.DS_Store

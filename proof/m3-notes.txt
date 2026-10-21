@@ -1,0 +1,14 @@
+M3 gap: radar play and scrub are not proven.
+
+proof/m3-play.png and proof/m3-scrub.png are the same picture of the loop: "Sun · 12:00 am", thumb at the left end (label 12:00a), while the right-hand label is 2:00a. Play only flipped the button to pause. Scrub never left that frame. The source already asks for the latest RainViewer frame (range value = frames.length - 1, mountRadar index = last) and wires play (650ms setInterval) plus range input → show(). That did not show up in the shots, so the live control is wrong or the first play tick wraps last→0 and then stalls on the oldest frame.
+
+Plan:
+1. Run the app and watch #radar-when, #radar-range value, and the visible tile in headless Chrome at 390×844. Confirm whether open lands on the latest frame, whether Play keeps stepping index/timestamp/tiles, and whether a real pointer drag seeks.
+2. Fix the player so all three are visible:
+   - Open on the latest frame: thumb at the end, timestamp = that frame, only that tile layer opaque.
+   - Play steps forward (timestamp, thumb, and radar image) on a timer and keeps going; looping back to the oldest frame is fine only after the newer frames have been shown.
+   - Dragging the slider seeks to that index, updates the timestamp and the tile, and stops playback.
+   - Paint the track fill from the value so the thumb position cannot look stuck at the left while the value is later.
+3. Replace the two proofs at 390×844 and look at them. m3-play.png after a few seconds of playback. m3-scrub.png after a drag to a different frame. The two timestamps must differ.
+4. Node-test api/tropics.js against live NHC CurrentStorms.json: handler returns 200 and the same activeStorms the feed has now.
+5. Append one PROGRESS.md line starting "M3 done" with what the shots and the handler test showed. Do not start M4. Stop the server before exit.
